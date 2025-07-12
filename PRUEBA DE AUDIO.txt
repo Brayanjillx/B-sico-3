@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reproductor de Audio para Examen</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f0f0f0;
+            margin: 0;
+        }
+        .container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        audio {
+            width: 100%;
+            max-width: 400px;
+            margin-bottom: 20px;
+        }
+        #playButton {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #playButton:hover {
+            background-color: #0056b3;
+        }
+        #playButton:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        #message {
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Audio para Examen de Idiomas</h1>
+        <audio id="examenAudio" src="C:\Users\CENLEX Zac 21\Downloads\audio examen\Audio 1-B3-B-FM.mp3.m4a" preload="auto"></audio>
+        <button id="playButton">Reproducir Audio</button>
+        <p id="message">El audio se puede reproducir 2 veces.</p>
+    </div>
+
+    <script>
+        const audio = document.getElementById('examenAudio');
+        const playButton = document.getElementById('playButton');
+        const message = document.getElementById('message');
+        let playCount = 0;
+        const maxPlays = 2;
+
+        // Deshabilitar los controles nativos del audio
+        audio.controls = false;
+
+        playButton.addEventListener('click', () => {
+            if (playCount < maxPlays) {
+                audio.play();
+                playCount++;
+                updateMessage();
+                if (playCount >= maxPlays) {
+                    playButton.disabled = true;
+                    message.textContent = 'El audio ha sido reproducido el máximo de veces.';
+                    message.style.color = 'red';
+                }
+            }
+        });
+
+        audio.addEventListener('ended', () => {
+            if (playCount < maxPlays) {
+                message.textContent = `Reproducciones restantes: ${maxPlays - playCount}`;
+            }
+        });
+
+        function updateMessage() {
+            if (playCount < maxPlays) {
+                message.textContent = `Reproducciones restantes: ${maxPlays - playCount}`;
+                message.style.color = '#666';
+            }
+        }
+
+        // Mostrar el estado inicial de reproducciones
+        updateMessage();
+    </script>
+</body>
+</html>
