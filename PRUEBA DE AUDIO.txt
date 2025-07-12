@@ -57,7 +57,7 @@
 <body>
     <div class="container">
         <h1>Audio para Examen de Idiomas</h1>
-        <audio id="examenAudio" src="C:\Users\CENLEX Zac 21\Downloads\audio examen\Audio 1-B3-B-FM.mp3.m4a" preload="auto"></audio>
+        <audio id="examenAudio" src="https://github.com/Brayanjillx/B-sico-3/blob/main/Audio%201-B3-B-FM.m4a" preload="auto"></audio>
         <button id="playButton">Reproducir Audio</button>
         <p id="message">El audio se puede reproducir 2 veces.</p>
     </div>
